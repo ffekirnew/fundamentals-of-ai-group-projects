@@ -1,4 +1,4 @@
-# fundamentals-of-ai-group-projects
+# Fundamentals of AI Group Projects
 This GitHub repository contains a collection of group projects for the course fundamentals of artificial intelligence (AI).
 
 ## Team Members
