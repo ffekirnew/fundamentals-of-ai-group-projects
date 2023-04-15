@@ -1,16 +1,11 @@
 class Graph:
     def __init__(self) -> None:
         self.graph: dict(dict(int)) = {} # to contain key value pairs of ( node : (neighbours : weight ) )
-
-    def get_nodes(self) -> list[str]:
-        """Get all nodes on the graph.
-
-        Returns:
-            list[str]: A list of all nodes in the graph.
-        """
-        return list(self.graph.keys())
     
-    def add_node(self, node: str) -> None:
+    def __repr__(self) -> str:
+        return f"Graph: {list(self.graph.keys())}"
+    
+    def add_node(self, node: str, latitude: float, longitude: float) -> None:
         """Add a new node to the graph.
 
         Args:
@@ -18,7 +13,7 @@ class Graph:
         """
         # check if the node already exists in the graph
         if node not in self.graph:
-            self.graph[node] = {} # to contain key value pairs of ( neighbours : weight )
+            self.graph[node] = [(latitude, longitude,), {}] # to contain key value pairs of ( neighbours : weight )
     
     def insert_edge(self, node1: str, node2: str, weight: int) -> None:
         """Insert an edge between two nodes into the graph.
@@ -28,13 +23,12 @@ class Graph:
             node2 (str): Representation of node 2.
             weight (int): Representation of the weight of the path between the two nodes.
         """
-        # add both nodes to the graph
-        self.add_node(node1)
-        self.add_node(node2)
+        if node1 not in self.graph or node2 not in self.graph:
+            raise Exception("One or both of the nodes don't exist on the graph.")
 
         # make each nodes the neighbours of eachother by adding them to the graph with the given weight
-        self.graph[node1][node2] = weight
-        self.graph[node2][node1] = weight
+        self.graph[node1][1][node2] = weight
+        self.graph[node2][1][node1] = weight
     
     def delete_node(self, node: str) -> None:
         """Delete a node in the graph.
@@ -46,7 +40,7 @@ class Graph:
         if node in self.graph:
 
             # if so, delete all references of the node from all neighbours
-            for neighbour in self.graph[node]:
+            for neighbour in self.graph[node][1]:
                 del self.graph[neighbour][node]
             
             # finally delete the node
@@ -64,40 +58,43 @@ class Graph:
 
             # check if there is an edge between the nodes.
             if node2 in self.graph[node1]:
-                del self.graph[node1][node2]
-                del self.graph[node2][node1]
+                del self.graph[node1][1][node2]
+                del self.graph[node2][1][node1]
     
-    def get_neighbours(self, node: str) -> dict:
-        if node in self.graph:
-            return list(self.graph[node].items())
+    def search_node(self, node: str) -> bool:
+        """Search for a node in the graph.
 
+        Args:
+            node (str): Representation of the node to be searched.
 
-def load_romania_graph() -> Graph:
+        Returns:
+            bool: True if the node exists on the graph, false otherwise.
+        """
+        return node in self.graph
+
+def load_romania() -> Graph:
+    """Load the Romanian map from the book.
+
+    Returns:
+        Graph: The graph representation of the Romanian cities.
+    """
+    # create an empty graph 
     romania = Graph()
 
-    # add the nodes to the graph
-    romania.add_node("Oradea")
-    romania.add_node("Zerind")
-    romania.add_node("Arad")
-    romania.add_node("Timisoara")
-    romania.add_node("Lugoj")
-    romania.add_node("Mehadia")
-    romania.add_node("Drobeta")
-    romania.add_node("Sibiu")
-    romania.add_node("Rimnicu Vilcea")
-    romania.add_node("Craiova")
-    romania.add_node("Fagaras")
-    romania.add_node("Pitesti") 
-    romania.add_node("Bucharest") 
-    romania.add_node("Giurgiu") 
-    romania.add_node("Neamt") 
-    romania.add_node("Iasi") 
-    romania.add_node("Vaslui") 
-    romania.add_node("Urziceni") 
-    romania.add_node("Hirsova") 
-    romania.add_node("Eforie")
+    # open the file and read the coordinates
+    with open('./romanian_cities.txt') as file:
+        cities = file.read().split("\n")[1:]
+    
+    # add the cities as nodes to the graph
+    for city in cities:
+        print(city)
+        name, x, y = city.split("    ")
+        x = float(x)
+        y = float(y)
 
-    # insert the edges between the different nodes
+        romania.add_node(name, x, y)
+    
+    # add the edges
     romania.insert_edge("Oradea", "Zerind", 71)
     romania.insert_edge("Oradea", "Sibiu", 151)
     romania.insert_edge("Zerind", "Arad", 75)
@@ -121,4 +118,5 @@ def load_romania_graph() -> Graph:
     romania.insert_edge("Urziceni", "Hirsova", 98)
     romania.insert_edge("Hirsova", "Eforie", 86)
 
+    # print romania
     return romania

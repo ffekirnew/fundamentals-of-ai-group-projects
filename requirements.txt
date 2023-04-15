@@ -1,0 +1,2 @@
+# to install the dependencies, do pip install -r requirements.txt
+jupyter
