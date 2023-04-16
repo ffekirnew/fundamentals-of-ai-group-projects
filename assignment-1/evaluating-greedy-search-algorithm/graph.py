@@ -71,6 +71,49 @@ class Graph:
             bool: True if the node exists on the graph, false otherwise.
         """
         return node in self.graph
+    
+    def get_nodes(self) -> list[str]:
+        """Return the nodes in the graph.
+
+        Returns:
+            list[str]: A list containing all string nodes.
+        """
+        return list(self.graph.keys())
+    
+    def get_neighbours(self, node: str) -> list[str]:
+        """Return the neighbours of a node in the graph.
+
+        Args:
+            node (str): The node to which we want the neighbours for.
+
+        Raises:
+            ValueError: If the node doesn't exist on the graph.
+
+        Returns:
+            list(str): The list of names of the nodes neighbours.
+        """
+        if node not in self.graph:
+            raise ValueError("The node you requested doesn't exist on the graph.")
+
+        return list(self.graph[node][1].keys())
+
+    def __getitem__(self, key: str) -> list[tuple[float, float], dict[str, int]]:
+        """Get a specific node from the graph.
+
+        Args:
+            key (str): The node data we are looking for.
+
+        Raises:
+            ValueError: If the node doesn't exist on the graph.
+
+        Returns:
+            List[Tuple(int), Dict(int)]: Returns a list of a tuple, the location,
+            and a dictionary of all neighbouring nodes.
+        """
+        if key not in self.graph:
+            raise ValueError("The node you requested doesn't exist on the graph.")
+        
+        return self.graph[key]
 
 def load_romania() -> Graph:
     """Load the Romanian map from the book.
@@ -82,12 +125,11 @@ def load_romania() -> Graph:
     romania = Graph()
 
     # open the file and read the coordinates
-    with open('./romanian_cities.txt') as file:
+    with open('romanian_cities.txt') as file:
         cities = file.read().split("\n")[1:]
     
     # add the cities as nodes to the graph
     for city in cities:
-        print(city)
         name, x, y = city.split("    ")
         x = float(x)
         y = float(y)
@@ -120,3 +162,5 @@ def load_romania() -> Graph:
 
     # print romania
     return romania
+
+romania = load_romania()
