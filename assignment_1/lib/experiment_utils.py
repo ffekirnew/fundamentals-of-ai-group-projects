@@ -12,7 +12,7 @@ def node_experiment(experiment_graphs, search_algorithm):
     # take the nodes from the first graph which only has 10 nodes, and pick five of them to run all experiments with
     nodes = experiment_graphs[0][1].get_nodes()
     shuffle(nodes)
-    random_nodes = nodes[:5]
+    random_nodes = nodes[:10]
 
     # run and record the results in a dictionary
     results = {}
@@ -20,13 +20,14 @@ def node_experiment(experiment_graphs, search_algorithm):
     for label, graph in experiment_graphs:
         results[label] = {}
 
-        for node1 in random_nodes:
-            for node2 in random_nodes:
-                if node1 is not node2:
-                    path = search_algorithm(graph, node1, node2)
-                    time_taken = timeit.timeit(lambda: search_algorithm(graph, node1, node2), number=5)
+        for i in range(len(random_nodes)):
+            for j in range(i + 1, len(random_nodes)):
+                node1 = random_nodes[i]
+                node2 = random_nodes[j]
+                path = search_algorithm(graph, node1, node2)
+                time_taken = timeit.timeit(lambda: search_algorithm(graph, node1, node2), number=5)
 
-                    results[label][f"{node1} to {node2}"] = (time_taken * 1000, path)
+                results[label][f"{node1} to {node2}"] = (time_taken * 1000, path)
 
     return experiment_graphs, results
 
