@@ -63,17 +63,6 @@ class Graph:
                 del self.graph[node1][1][node2]
                 del self.graph[node2][1][node1]
     
-    def search_node(self, node: str) -> bool:
-        """Search for a node in the graph.
-
-        Args:
-            node (str): Representation of the node to be searched.
-
-        Returns:
-            bool: True if the node exists on the graph, false otherwise.
-        """
-        return node in self.graph
-    
     def get_nodes(self) -> list[str]:
         """Return the nodes in the graph.
 

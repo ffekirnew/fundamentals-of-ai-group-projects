@@ -1,13 +1,8 @@
 import sys
 import os
 
-# get the absolute path of the parent directory of the current directory
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../../"))
-
-# add the parent directory to the system path
 sys.path.append(parent_dir)
-
-# import the Graph class from the graph module
 from assignment_1.lib.graph import Graph
 
 
