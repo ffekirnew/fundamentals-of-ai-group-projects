@@ -11,14 +11,14 @@ def stack_plot(label: str, x_row: list, y_data: list[list], labels):
         labels (_type_): The data to be put as legend.
     """
     colors = ['#F72585', '#7209B7', '#3A0CA3', '#4361EE', '#4895EF', '#4CC9F0', '#A3F7B5', '#457B9D', '#1D3557', '#E63946', '#F1FAEE', '#A8DADC', '#FCA311', '#FFD5C2', '#9C89B8', '#6D597A']
-    plt.figure(figsize=(18, 8))
+    plt.figure(figsize=(20, 8))
     plt.stackplot(x_row, y_data, labels=labels, colors=colors)
     plt.title(label)
     plt.tight_layout()
     plt.legend(loc='upper left')
     plt.savefig(f'output/{label}.png', format='png')
 
-def graph_visualizer(graphs):
+def graph_visualizer(graphs, save=True):
     """Create a visualizer for a given graph.
 
     Args:
@@ -52,5 +52,8 @@ def graph_visualizer(graphs):
                 nx.draw(G, pos=node_pos, with_labels=True, ax=axs[i][j])
                 axs[i][j].set_title(label)
 
-        # Save the figures
-        plt.savefig(f'output/experiment_graph_with_{k}0_nodes.png', format='png')
+        # Save the figures or show them
+        if save:
+            plt.savefig(f'output/experiment_graph_with_{k}0_nodes.png', format='png')
+        else:
+            plt.show()

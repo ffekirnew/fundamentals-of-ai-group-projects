@@ -8,6 +8,28 @@ sys.path.append(parent_dir)
 from assignment_1.lib.graph_utils import create_random_graph, insert_random_edges
 from assignment_1.lib.load_romanian_cities import load_romania
 
+def node_experiment(experiment_graphs, search_algorithm):
+    # take the nodes from the first graph which only has 10 nodes, and pick five of them to run all experiments with
+    nodes = experiment_graphs[0][1].get_nodes()
+    shuffle(nodes)
+    random_nodes = nodes[:5]
+
+    # run and record the results in a dictionary
+    results = {}
+
+    for label, graph in experiment_graphs:
+        results[label] = {}
+
+        for node1 in random_nodes:
+            for node2 in random_nodes:
+                if node1 is not node2:
+                    path = search_algorithm(graph, node1, node2)
+                    time_taken = timeit.timeit(lambda: search_algorithm(graph, node1, node2), number=5)
+
+                    results[label][f"{node1} to {node2}"] = (time_taken * 1000, path)
+
+    return experiment_graphs, results
+
 def experiment(search_algorithm, num_nodes: list[int], edge_probabilities: list[float]) -> tuple[list, dict]:
     """Do experiment and return the experiment data set and the results.
 
@@ -29,26 +51,8 @@ def experiment(search_algorithm, num_nodes: list[int], edge_probabilities: list[
             edges_added_graph = insert_random_edges(graph.get_copy(), edge_prob)
             experiment_graphs.append((f"{len(graph.get_nodes())}, {edge_prob}", edges_added_graph))
 
-    # take the nodes from the first graph which only has 10 nodes, and pick five of them to run all experiments with
-    nodes = experiment_graphs[0][1].get_nodes()
-    shuffle(nodes)
-    random_5_nodes = nodes[:5]
-
-    # run and record the results in a dictionary
-    results = {}
-
-    for label, graph in experiment_graphs:
-        results[label] = {}
-
-        for node1 in random_5_nodes:
-            for node2 in random_5_nodes:
-                if node1 is not node2:
-                    path = search_algorithm(graph, node1, node2)
-                    time_taken = timeit.timeit(lambda: search_algorithm(graph, node1, node2), number=5)
-
-                    results[label][f"{node1} to {node2}"] = (time_taken * 1000, path)
+    return node_experiment(experiment_graphs, search_algorithm)
     
-    return experiment_graphs, results
 
 def city_benchmark(search_algorithm):
     # load romanian cities from the book and the file and set them up to choose 10 random cities
@@ -73,7 +77,7 @@ def city_benchmark(search_algorithm):
                 total_path_length += len(path)
 
     # Print the average time and path length recorded
-    number_of_experiments = 90 # 10 cities, we try to find path between one city with the rest 9
+    number_of_experiments = 45 # 10 cities, we try to find path between one city with the rest 9
     average_time = total_time / number_of_experiments
     average_path_length = total_path_length / number_of_experiments
 
