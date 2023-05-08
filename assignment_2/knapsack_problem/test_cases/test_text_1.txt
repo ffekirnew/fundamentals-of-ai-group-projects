@@ -1,0 +1,51 @@
+50
+Item,weight,value, n_items
+Phone,0.19,1000, 5
+Laptop,1.1,700, 2
+Tablet,0.8,600, 4
+Camera,0.5,450, 3
+Headphones,0.3,200, 6
+Smartwatch,0.2,300, 7
+Speaker,0.7,400, 2
+Drone,1.3,800, 1
+Gaming Laptop,1.5,1000, 1
+VR Headset,1.2,600, 2
+Bluetooth Earbuds,0.1,150, 8
+Wireless Charger,0.05,50, 10
+Bluetooth Speaker,0.6,300, 4
+Power Bank,0.2,150, 6
+External Hard Drive,0.3,250, 3
+Fitness Tracker,0.1,100, 12
+Smart Thermostat,0.3,200, 5
+Kindle,0.2,120, 8
+Mouse,0.05,50, 15
+Keyboard,0.1,80, 10
+USB Drive,0.01,20, 20
+Portable Monitor,0.8,400, 2
+Smart Scale,0.2,150, 6
+Wireless Mouse,0.05,40, 15
+Laptop Stand,0.5,100, 4
+Ethernet Cable,0.1,10, 25
+HDMI Cable,0.05,15, 20
+USB Hub,0.1,30, 15
+Microphone,0.2,100, 8
+Bluetooth Keyboard,0.1,70, 10
+USB-C Hub,0.05,25, 20
+Webcam,0.1,80, 10
+Memory Card,0.01,10, 30
+Wireless Headphones,0.3,200, 6
+Gaming Mouse,0.1,80, 10
+Gaming Keyboard,0.2,120, 8
+External SSD,0.2,200, 5
+Flashlight,0.1,20, 15
+Wireless Adapter,0.05,30, 20
+Tripod,0.5,100, 4
+Binoculars,0.3,150, 6
+Camera Lens,0.2,100, 8
+Portable Projector,1,500, 1
+Camping Stove,1,300, 2
+Sleeping Bag,1.5,200, 3
+Backpack,0.8,100, 5
+Tent,2,400, 1
+Hiking Boots,1,150, 6
+Sunglasses,0.05,20, 30
