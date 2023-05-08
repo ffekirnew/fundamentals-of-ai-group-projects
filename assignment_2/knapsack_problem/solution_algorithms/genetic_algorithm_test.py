@@ -4,6 +4,7 @@ from typing import List
 from knapsack_types import Item, Individual
 from genetic_algorithm import GeneticAlgorithm
 
+
 class TestGeneticAlgorithm(unittest.TestCase):
     def setUp(self):
         # Set up some test data
@@ -17,7 +18,7 @@ class TestGeneticAlgorithm(unittest.TestCase):
 
     def test_generate_random_individual(self):
         individual = self.ga.generate_random_individual()
-        self.assertEqual(len(individual), self.ga.chromosom_length)
+        self.assertEqual(len(individual), self.ga.chromosome_length)
 
     def test_generate_initial_population(self):
         population_size = 10
@@ -60,7 +61,7 @@ class TestGeneticAlgorithm(unittest.TestCase):
         self.assertEqual(len(selections), number_of_selections)
         for selection in selections:
             self.assertIsInstance(selection, List)
-    
+
     def test_single_point_crossover(self):
         parent_1 = [1, 0, 1, 0, 1]
         parent_2 = [0, 1, 0, 1, 0]
@@ -70,7 +71,6 @@ class TestGeneticAlgorithm(unittest.TestCase):
         self.assertEqual(children, expected_children)
 
     def test_mutate(self):
-        ga = GeneticAlgorithm(self.items, self.weight_limit)
         individual = [1, 0, 1, 0, 1]
         expected_individuals = [
             [0, 0, 1, 0, 1],
@@ -79,7 +79,7 @@ class TestGeneticAlgorithm(unittest.TestCase):
             [1, 0, 1, 1, 1],
             [1, 0, 1, 0, 0]
         ]
-        for expected_individual in expected_individuals:
+        for _ in expected_individuals:
             new_individual: Individual = self.ga.mutate(individual.copy())
             self.assertIn(new_individual, expected_individuals)
 
@@ -94,3 +94,7 @@ class TestGeneticAlgorithm(unittest.TestCase):
         number_of_generations = 5
         max_global_fitness = self.ga.run(population_size, number_of_generations)
         self.assertEqual(type(max_global_fitness), tuple)
+
+
+if __name__ == '__main__':
+    unittest.main()

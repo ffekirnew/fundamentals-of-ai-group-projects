@@ -1,15 +1,16 @@
 import argparse
 
 # import the types for the solution
-from knapsack_types import Item, WeightLimit
+from solution_algorithms.knapsack_types import Item
 
 # import the GeneticAlgorithm class from your implementation
-from genetic_algorithm import GeneticAlgorithm
+from solution_algorithms.genetic_algorithm import GeneticAlgorithm
+
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Solve the knapsack problem.')
+    parser = argparse.ArgumentParser(description='Solve the knapsack problem using different algorithms.')
     parser.add_argument('--algorithm', type=str, default='ga',
-                        help='algorithm to use (ga or dp)')
+                        help='algorithm to use (ga, hc, or sa)')
     parser.add_argument('--file', type=str, required=True,
                         help='path to input file')
 
@@ -37,6 +38,14 @@ def main():
         print(f'Optimal value: {best_fitness}')
         print(
             f'Items in knapsack: {", ".join(str(i) for i in solution)}')
+
+    elif args.algorithm == 'hc':
+        # TODO: Implement the hill climbing algorithm and use it here
+        pass
+
+    elif args.algorithm == 'sa':
+        # TODO: Implement the hill climbing algorithm and use it here
+        pass
 
 
 if __name__ == '__main__':
