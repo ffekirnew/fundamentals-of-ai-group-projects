@@ -100,23 +100,26 @@ class GeneticAlgorithm:
 
         return individual
 
-    def reproduce(self, population: Population) -> List[Individual]:
+    def reproduce(self, population: Population) -> Population:
         parents: Population = self.select_parents(population, 2)
         children: Population = self.single_point_crossover(parents[0], parents[1],
                                                            randint(0, self.chromosome_length - 1))
 
         return children
 
-    def run(self, population_size: int = 1000, number_of_generations: int = 1000):
+    def run(self, population_size: int = 1000, number_of_generations: int = 1000) -> tuple[int, Individual]:
         solution_chromosome: Individual = []
         max_global_fitness: Fitness = 0
-        population: Population = self.generate_initial_population(population_size)
+        population: Population = self.generate_initial_population(
+            population_size)
 
         for i in range(number_of_generations):
-            population_fitness = max(self.fitness(individual) for individual in population)
+            population_fitness = max(self.fitness(individual)
+                                     for individual in population)
 
             if population_fitness > max_global_fitness:
-                population.sort(key=lambda individual: self.fitness(individual), reverse=True)
+                population.sort(key=lambda individual: self.fitness(
+                    individual), reverse=True)
                 solution_chromosome = population[0]
                 max_global_fitness = population_fitness
 
@@ -129,7 +132,8 @@ class GeneticAlgorithm:
                 self.mutate(child)
 
             population += children
-            population.sort(key=lambda individual: self.fitness(individual), reverse=True)
+            population.sort(key=lambda individual: self.fitness(
+                individual), reverse=True)
 
             population = population[:population_size]
 
