@@ -1,6 +1,6 @@
 from random import choice, random, randint
 from typing import List
-from knapsack_types import Items, WeightLimit, Gene, Individual, Population, Fitness
+from .knapsack_types import Items, WeightLimit, Gene, Individual, Population, Fitness
 
 
 class GeneticAlgorithm:

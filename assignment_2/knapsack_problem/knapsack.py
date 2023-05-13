@@ -5,12 +5,15 @@ from solution_algorithms.knapsack_types import Item
 
 # import the GeneticAlgorithm class from your implementation
 from solution_algorithms.genetic_algorithm import GeneticAlgorithm
+from solution_algorithms.hill_climbing_algorithm import HillClimbingAlgorithm
+from solution_algorithms.simulated_annealing_algorithm import SimulatedAnnealingAlgorithm
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Solve the knapsack problem using different algorithms.')
+    parser = argparse.ArgumentParser(
+        description='Solve the knapsack problem using different algorithms.')
     parser.add_argument('--algorithm', type=str, default='ga',
-                        help='algorithm to use (ga, hc, or sa)')
+                        help='algorithm to use (ga, hca, or sa)')
     parser.add_argument('--file', type=str, required=True,
                         help='path to input file')
 
@@ -27,7 +30,8 @@ def main():
         items = []
         for line in lines[2:]:
             item, weight, value, n_items = line.strip().split(',')
-            items.append(Item(name=item, weight=float(weight), value=float(value), n_items=int(n_items)))
+            items.append(Item(name=item, weight=float(weight),
+                         value=float(value), n_items=int(n_items)))
 
     # create an instance of the selected algorithm and solve the problem
     if args.algorithm == 'ga':
@@ -39,13 +43,26 @@ def main():
         print(
             f'Items in knapsack: {", ".join(str(i) for i in solution)}')
 
-    elif args.algorithm == 'hc':
-        # TODO: Implement the hill climbing algorithm and use it here
-        pass
+    elif args.algorithm == 'hca':
+        hca = HillClimbingAlgorithm(items, capacity)
+        best_value, solution = hca.run()
+
+        # print the solution
+        print(f'Optimal value: {best_value}')
+        print(
+            f'Items in knapsack: {", ".join(str(i) for i in solution)}')
 
     elif args.algorithm == 'sa':
-        # TODO: Implement the hill climbing algorithm and use it here
-        pass
+        sa = SimulatedAnnealingAlgorithm(items, capacity)
+        best_value, solution = sa.run()
+
+        # print the solutions
+        print(f'Optimal value: {best_value}')
+        print(
+            f'Items in knapsack: {", ".join(str(i) for i in solution)}')
+    else:
+        print('Chosen algorithm can only be one of: sa, hca, ga.')
+
 
 
 if __name__ == '__main__':
