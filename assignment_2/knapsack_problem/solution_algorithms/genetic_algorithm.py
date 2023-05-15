@@ -1,6 +1,6 @@
 from random import choice, random, randint
 from typing import List, Tuple
-from .knapsack_types import Items, WeightLimit, Gene, Individual, Population, Fitness
+from ._knapsack_types import Items, WeightLimit, Gene, Individual, Population, Fitness
 
 
 class GeneticAlgorithm:
@@ -197,7 +197,7 @@ class GeneticAlgorithm:
         population: Population = self.generate_initial_population(
             population_size)
 
-        for i in range(number_of_generations):
+        for _ in range(number_of_generations):
             population_fitness = max(self.fitness(individual)
                                      for individual in population)
 

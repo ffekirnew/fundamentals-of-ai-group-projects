@@ -1,7 +1,7 @@
 import unittest
 from random import seed
 from typing import List
-from knapsack_types import Item, Individual
+from _knapsack_types import Item, Individual
 from genetic_algorithm import GeneticAlgorithm
 
 

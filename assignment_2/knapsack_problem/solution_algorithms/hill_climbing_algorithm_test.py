@@ -1,6 +1,6 @@
 import unittest
 from hill_climbing_algorithm import HillClimbingAlgorithm
-from knapsack_types import Item, WeightLimit
+from _knapsack_types import Item, WeightLimit
 
 
 class TestHillClimbingAlgorithm(unittest.TestCase):
@@ -17,20 +17,20 @@ class TestHillClimbingAlgorithm(unittest.TestCase):
 
     def test_evaluate_solution_value(self):
         self.assertEqual(
-            self.algorithm.evalueate_solution_value([1, 0, 1, 0]), 1100)
+            self.algorithm.evaluate_solution_value([1, 0, 1, 0]), 1100)
         self.assertEqual(
-            self.algorithm.evalueate_solution_value([0, 0, 0, 0]), 0)
+            self.algorithm.evaluate_solution_value([0, 0, 0, 0]), 0)
         self.assertEqual(
-            self.algorithm.evalueate_solution_value([1, 1, 1, 1]), 3500)
+            self.algorithm.evaluate_solution_value([1, 1, 1, 1]), 3500)
         self.assertEqual(
-            self.algorithm.evalueate_solution_value([1, 0, 0, 1]), 2700)
+            self.algorithm.evaluate_solution_value([1, 0, 0, 1]), 2700)
 
     def test_generate_initial_solution(self):
         solution = self.algorithm.generate_initial_solution()
         self.assertEqual(len(solution), len(self.items))
         self.assertLessEqual(sum(solution), self.weight_limit)
         self.assertGreater(
-            self.algorithm.evalueate_solution_value(solution), 0)
+            self.algorithm.evaluate_solution_value(solution), 0)
 
     def test_generate_solution_neighbour(self):
         solution = [1, 1, 0, 0]
@@ -38,7 +38,7 @@ class TestHillClimbingAlgorithm(unittest.TestCase):
             solution)
         self.assertEqual(len(neighbour), len(solution))
         self.assertGreater(
-            neighbour_value, self.algorithm.evalueate_solution_value(solution))
+            neighbour_value, self.algorithm.evaluate_solution_value(solution))
 
     def test_run(self):
         value, items = self.algorithm.run()

@@ -3,7 +3,7 @@ from collections import namedtuple
 
 Item = namedtuple('Item', ['name', 'weight', 'value', 'n_items'])
 Items = List[Item]
-WeightLimit = int
+WeightLimit = float
 
 # Genetic Algorithm Types
 Gene = int
