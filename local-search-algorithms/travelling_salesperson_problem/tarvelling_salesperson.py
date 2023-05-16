@@ -1,4 +1,6 @@
 import argparse
+from solution_algorithms.hill_climbing_algorithm import *
+from solution_algorithms.simulated_annealing import *
 
 # PROBLEM STATEMENT #
 # You are given the Romania map, and you are asked to come up with the shortest path to visit all the cities using a local search algorithm.
@@ -40,11 +42,15 @@ def main():
 
     elif args.algorithm == 'hc':
         # TODO: Implement the hill climbing algorithm and use it here
-        pass
+        hill_climbing = HillClimbingAlgorithm()
+        hill_climbing.run()
+        
 
     elif args.algorithm == 'sa':
         # TODO: Implement the simulated annealing algorithm and use it here
-        pass
+        simulated_annealing = SimulatedAnnealingAlgorithm()
+        simulated_annealing.run()
+        
 
 
 if __name__ == '__main__':
