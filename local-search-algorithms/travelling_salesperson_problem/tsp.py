@@ -47,7 +47,6 @@ def main():
     elif args.algorithm == 'hc':
         selected_algorithm = HillClimbingAlgorithm(graph, cities)
 
-
     elif args.algorithm == 'sa':
         selected_algorithm = SimulatedAnnealingAlgorithm(graph, cities)
 
