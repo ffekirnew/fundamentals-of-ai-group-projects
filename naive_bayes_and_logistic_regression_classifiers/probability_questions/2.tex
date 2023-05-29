@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\begin{document}
+
+Two dice are rolled. Let:
+\[A = \text{'sum of two dice equals 3'},\]
+\[B = \text{'sum of two dice equals 7'},\]
+\[C = \text{'at least one of the dice shows a 1'}.\]
+
+We are asked to find the following probabilities:
+
+\textbf{1.} Probability of A given C (\(P(A|C)\)):
+To find \(P(A|C)\), we need to determine the probability of event A occurring given that event C has occurred.
+We know that event C occurs if at least one of the dice shows a 1. There are 36 equally likely outcomes when two dice are rolled, and out of these, 11 outcomes have at least one 1.
+Out of these 11 outcomes, only 2 outcomes result in a sum of 3 (1+2 and 2+1).
+Therefore, the probability of A given C is:
+\[P(A|C) = \frac{{\text{{number of outcomes where both A and C occur}}}}{{\text{{number of outcomes where C occurs}}}} = \frac{2}{11}.\]
+
+\textbf{2.} Probability of B given C (\(P(B|C)\)):
+To find \(P(B|C)\), we need to determine the probability of event B occurring given that event C has occurred.
+We know that event C occurs if at least one of the dice shows a 1. Again, out of 36 equally likely outcomes, 11 outcomes have at least one 1.
+Out of these 11 outcomes, none result in a sum of 7.
+Therefore, the probability of B given C is:
+\[P(B|C) = \frac{{\text{{number of outcomes where both B and C occur}}}}{{\text{{number of outcomes where C occurs}}}} = 0.\]
+
+\textbf{3.} Independence of A and C:
+A and C are independent if and only if \(P(A \cap C) = P(A) \cdot P(C)\).
+The probability of A is \(\frac{2}{36}\) (there are 2 outcomes resulting in a sum of 3 out of 36 total outcomes).
+The probability of C is \(\frac{11}{36}\) (there are 11 outcomes with at least one 1 out of 36 total outcomes).
+The probability of A and C occurring together (intersection) is \(\frac{2}{36}\).
+Checking if \(P(A \cap C) = P(A) \cdot P(C)\):
+\[\frac{2}{36} \neq \left(\frac{2}{36}\right) \cdot \left(\frac{11}{36}\right).\]
+Since the equation does not hold, A and C are not independent.
+
+\textbf{4.} Independence of B and C:
+B and C are independent if and only if \(P(B \cap C) = P(B) \cdot P(C)\).
+The probability of B is \(\frac{6}{36}\) (there are 6 outcomes resulting in a sum of 7 out of 36 total outcomes).
+The probability of C is \(\frac{11}{36}\) (there are 11 outcomes with at least one 1 out of 36 total outcomes).
+The probability of B and C occurring together (intersection) is 0 (no outcomes have both events occurring).
+Checking if \(P(B \cap C) = P(B) \cdot P(C)\):
+\[0 = \left(\frac{6}{36}\right) \cdot \left(\frac{11}{36}\right).\]
+Since the equation holds, B and C are independent.
+
+\end{document}
